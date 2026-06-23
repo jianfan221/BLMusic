@@ -4,7 +4,7 @@
 ## Notes-zhCN: 嗜血/英勇/时间扭曲时自动播放音乐
 ## Author: 简繁-无尽之海-CN
 ## IconTexture: 458224
-## Version: 20260623.2
+## Version: 20260624
 ## SavedVariables: BLMusicDB
 
 BLMusic.lua
