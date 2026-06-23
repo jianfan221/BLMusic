@@ -53,7 +53,7 @@ function ns.PlayStartMusic()
         return
     end
 
-    local _, handle = PlaySoundFile(MUSIC_PATH .. file, BLMusicDB.channel or "Dialog")
+    local _, handle = PlaySoundFile(MUSIC_PATH .. file, BLMusicDB.channel or "Master")
     if handle then
         soundHandle = handle
         if BLMusicDB.startDuration and BLMusicDB.startDuration > 0 then
@@ -77,7 +77,7 @@ function ns.PlayEndMusic()
         return
     end
 
-    local _, handle = PlaySoundFile(MUSIC_PATH .. file, BLMusicDB.channel or "Dialog")
+    local _, handle = PlaySoundFile(MUSIC_PATH .. file, BLMusicDB.channel or "Master")
     if handle then
         soundHandle = handle
         if BLMusicDB.endDuration and BLMusicDB.endDuration > 0 then
