@@ -20,7 +20,8 @@ jobs:
 
       - uses: BigWigsMods/packager@master
         with:
-          args: -p 1584248
+          args: -p 1584248 -a BNBmrqGx
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          WAGO_API_KEY: ${{ secrets.WAGO_API_KEY }}
           GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
