@@ -53,7 +53,7 @@ function ns.PlayStartMusic()
         return
     end
 
-    local _, handle = PlaySoundFile(MUSIC_PATH .. file, BLMusicDB.channel or "Master")
+    local _, handle = PlaySoundFile(MUSIC_PATH .. file, BLMusicDB.channel or "Dialog")
     if handle then
         soundHandle = handle
         if BLMusicDB.startDuration and BLMusicDB.startDuration > 0 then
@@ -77,7 +77,7 @@ function ns.PlayEndMusic()
         return
     end
 
-    local _, handle = PlaySoundFile(MUSIC_PATH .. file, BLMusicDB.channel or "Master")
+    local _, handle = PlaySoundFile(MUSIC_PATH .. file, BLMusicDB.channel or "Dialog")
     if handle then
         soundHandle = handle
         if BLMusicDB.endDuration and BLMusicDB.endDuration > 0 then
@@ -90,22 +90,21 @@ end
 -- 当前活跃的嗜血 auraInstanceID（同一时间只会存在一个）
 local activeAuraInstanceID
 
+-- 初始扫描：进入世界时检查是否已有嗜血 debuff（如重载前就在）
+EventRegistry:RegisterFrameEventAndCallback("PLAYER_ENTERING_WORLD", function()
+    activeAuraInstanceID = nil
+    for spellID in pairs(BLOODLUST_DEBUFFS) do
+        local aura = C_UnitAuras.GetUnitAuraBySpellID("player", spellID)
+        if aura and (not issecretvalue or not issecretvalue(aura.spellId)) then
+            activeAuraInstanceID = aura.auraInstanceID
+            return
+        end
+    end
+end)
+
 -- UNIT_AURA 回调: 检测嗜血类 buff 到达/结束
 EventRegistry:RegisterFrameEventAndCallback("UNIT_AURA", function(event, unit, updateInfo)
     if unit ~= "player" or not updateInfo then
-        return
-    end
-
-    -- isFullUpdate: 只刷新缓存
-    if updateInfo.isFullUpdate then
-        activeAuraInstanceID = nil
-        for spellID in pairs(BLOODLUST_DEBUFFS) do
-            local aura = C_UnitAuras.GetUnitAuraBySpellID(unit, spellID)
-            if aura then
-                activeAuraInstanceID = aura.auraInstanceID
-                return
-            end
-        end
         return
     end
 
