@@ -6,6 +6,7 @@ ns.start = {
 	{ path = "", name = DISABLE },
     { path = "msnzs.mp3", name = "Sailor Moon OST" ,},
     { path = "Guangzhi.mp3", name = "Guangzhi" },
+    { path = "pedrolust.mp3", name = "pedrolust" },   --提供者:月璃韶华
     { path = "retro game style.mp3", name = "Retro game style" },
     { path = "For the blood god.mp3", name = "For the blood god" },   --提供者:二萌Alice
     { path = "For the emperor.mp3", name = "For the emperor" },   --提供者:二萌Alice
