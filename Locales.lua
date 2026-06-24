@@ -40,7 +40,14 @@ ns.L = {
     ["打开"] = "打开",
 
     -- 联系弹窗内容
-    ["联系弹窗内容"] = "GitHub:https://github.com/jianfan221/BLMusic\n附件请带上音频文件\n电子邮箱:32655163@qq.com\n文件名称:\n显示名称:\n音频用途:开始时or可用时?\n附加信息:你的名字?",
+    ["联系弹窗内容"] = [[
+GitHub:https://github.com/jianfan221/BLMusic
+附件请带上音频文件
+电子邮箱:32655163@qq.com
+文件名称:一定要英文或者数字(中文会乱码失效)
+显示名称:如果是文本音频注明作者
+音频用途:开始时or可用时?
+附加信息:你的名字?"]],
 }
 
 -- 英语（非中文环境使用）
@@ -75,6 +82,13 @@ if GetLocale() ~= "zhCN" and GetLocale() ~= "zhTW" then
         ["联系作者"] = "Contact Author",
         ["打开"] = "Open",
 
-        ["联系弹窗内容"] = "GitHub:https://github.com/jianfan221/BLMusic\nPlease attach the audio file\nEmail: 32655163@qq.com\nFile name:\nDisplay name:\nUsage: Start or End?\nExtra info: Your name?",
+        ["联系弹窗内容"] = [[
+GitHub:https://github.com/jianfan221/BLMusic
+Please attach the audio file
+Email: 32655163@qq.com
+File name:
+Display name:
+Usage: Start or End?
+Extra info: Your name?]],
     }
 end
