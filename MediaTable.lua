@@ -1,11 +1,10 @@
 --- BLMusic 音频文件表,对应文件夹Media
 local addonName, ns = ...
-
+local locale = GetLocale() == "zhCN" or GetLocale() == "zhTW"
 -- 本地化辅助：简体/繁体中文用中文，其他语言用英文
 local function T(zh, en)
     en = en or zh
-    local locale = GetLocale()
-    return (locale == "zhCN" or locale == "zhTW") and zh or en
+    return locale and zh or en
 end
 
 -- {path = "音频文件名.后缀名", name = "下拉菜单显示的名字" }   --提供者:提供者名称
@@ -24,8 +23,11 @@ ns.start = {
     { path = "space marine attack.mp3", name = "Space marine attack" },   --提供者:二萌Alice
     { path = "yungongxunyin.mp3", name = T("云宫迅音", "Celestial Symphony") },
     { path = "Shining soul.mp3", name = T("天空战记光之魂", "Shining soul") }, --提供者:山鬼
-
 }
+--中文开始音频仅对中文用户显示
+if locale then
+    tinsert(ns.start, { path = "lulustar.ogg", name = "【露露】恶龙咆哮，嗷呜~" })
+end
 
 -- 结束音乐
 ns["end"] = {
@@ -35,3 +37,7 @@ ns["end"] = {
     { path = "Magic.mp3", name = "Magic" },
     { path = "Elf.mp3", name = "Elf" },
 }
+--中文结束音频仅对中文用户显示
+if locale then
+    tinsert(ns["end"], { path = "luluend.ogg", name = "【露露】嗜血好啦" })
+end
