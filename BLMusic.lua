@@ -52,8 +52,16 @@ function ns.PlayStartMusic()
     if not file or file == "" then
         return
     end
+    local path
+    if file == "123.mp3" then
+        path = "Interface\\123.mp3"
+    elseif file == "123.ogg" then
+        path = "Interface\\123.ogg"
+    else
+        path = MUSIC_PATH .. file
+    end
 
-    local _, handle = PlaySoundFile(MUSIC_PATH .. file, BLMusicDB.channel or "Master")
+    local _, handle = PlaySoundFile(path, BLMusicDB.channel or "Master")
     if handle then
         soundHandle = handle
         if BLMusicDB.startDuration and BLMusicDB.startDuration > 0 then
@@ -77,7 +85,16 @@ function ns.PlayEndMusic()
         return
     end
 
-    local _, handle = PlaySoundFile(MUSIC_PATH .. file, BLMusicDB.channel or "Master")
+    local path
+    if file == "456.mp3" then
+        path = "Interface\\456.mp3"
+    elseif file == "456.ogg" then
+        path = "Interface\\456.ogg"
+    else
+        path = MUSIC_PATH .. file
+    end
+
+    local _, handle = PlaySoundFile(path, BLMusicDB.channel or "Master")
     if handle then
         soundHandle = handle
         if BLMusicDB.endDuration and BLMusicDB.endDuration > 0 then
@@ -113,7 +130,9 @@ EventRegistry:RegisterFrameEventAndCallback("UNIT_AURA", function(event, unit, u
         for _, aura in ipairs(updateInfo.addedAuras) do
             if (not issecretvalue or not issecretvalue(aura.spellId)) and BLOODLUST_DEBUFFS[aura.spellId] then
                 activeAuraInstanceID = aura.auraInstanceID
-                ns.PlayStartMusic()
+                if (aura.expirationTime - GetTime()) > 595 then
+                    ns.PlayStartMusic()
+                end
                 return
             end
         end
