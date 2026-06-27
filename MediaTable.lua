@@ -27,7 +27,7 @@ ns.start = {
 --中文开始音频仅对中文用户显示
 if locale then
     tinsert(ns.start, { path = "lulustar.ogg", name = "【露露】恶龙咆哮，嗷呜~" })
-    tinsert(ns.start, { path = "nana7mistar.ogg", name = "Nana7mi" })
+    tinsert(ns.start, { path = "nana7mistar.ogg", name = "【Nana7mi】嗷呜~嗷呜~" })
 end
 
 -- 结束音乐
@@ -41,5 +41,5 @@ ns["end"] = {
 --中文结束音频仅对中文用户显示
 if locale then
     tinsert(ns["end"], { path = "luluend.ogg", name = "【露露】嗜血好啦" })
-    tinsert(ns["end"], { path = "nana7miend.ogg", name = "Nana7mi" })
+    tinsert(ns["end"], { path = "nana7miend.ogg", name = "【Nana7mi】嗜血好啦" })
 end
