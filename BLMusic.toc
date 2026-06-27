@@ -1,10 +1,10 @@
 ## Interface: 20205,30405,38000,38001,40402,50503,50504,120000,120001,120005,120007,120100
 ## Title: BLMusic
 ## Notes: Auto-play music during Bloodlust/Heroism/Time Warp
-## Notes-zhCN: 嗜血/英勇/时间扭曲时自动播放音乐
-## Author: 简繁-无尽之海-CN
+## Notes-zhCN: 嗜血/英勇/时间扭曲时自动播放音�?
+## Author: 简�?无尽之海-CN
 ## IconTexture: 458224
-## Version: 20260626
+## Version: 20260628
 ## SavedVariables: BLMusicDB
 
 BLMusic.lua
