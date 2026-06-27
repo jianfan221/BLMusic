@@ -43,3 +43,4 @@ if locale then
     tinsert(ns["end"], { path = "luluend.ogg", name = "【露露】嗜血好啦" })
     tinsert(ns["end"], { path = "nana7miend.ogg", name = "【Nana7mi】嗜血好啦" })
 end
+
