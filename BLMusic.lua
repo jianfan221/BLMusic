@@ -31,6 +31,7 @@ function ns.StopCurrentMusic()
         soundHandle = nil
     end
 end
+--死亡时停止
 EventRegistry:RegisterFrameEventAndCallback("PLAYER_DEAD", function()
     ns.StopCurrentMusic()
 end)
@@ -39,54 +40,33 @@ end)
 EventRegistry:RegisterFrameEventAndCallback("PLAYER_LEAVING_WORLD", function()
     ns.StopCurrentMusic()
 end)
+--关闭设置界面时停止,防止存在试听
+SettingsPanel:HookScript("OnHide", function()
+    ns.StopCurrentMusic()
+end)
 
--- 播放开始音频
-function ns.PlayStartMusic()
-    if not BLMusicDB.enabled then
-        return
+-- 从选中的音频 table 中随机取一个路径
+function ns.GetRandomPathFromSelected(selectedTbl)
+    if not selectedTbl then return nil end
+    local paths = {}
+    for path in pairs(selectedTbl) do
+        tinsert(paths, path)
     end
+    if #paths == 0 then return nil end
+    return paths[math.random(#paths)]
+end
 
+-- 播放指定音频文件（用于预览）
+function ns.PlayMusicFile(file, duration)
+    if not file or file == "" then return end
     ns.StopCurrentMusic()
 
-    local file = BLMusicDB.startMusicFile
-    if not file or file == "" then
-        return
-    end
     local path
     if file == "123.mp3" then
         path = "Interface\\123.mp3"
     elseif file == "123.ogg" then
         path = "Interface\\123.ogg"
-    else
-        path = MUSIC_PATH .. file
-    end
-
-    local _, handle = PlaySoundFile(path, BLMusicDB.channel or "Master")
-    if handle then
-        soundHandle = handle
-        if BLMusicDB.startDuration and BLMusicDB.startDuration > 0 then
-            stopTimer = C_Timer.NewTimer(BLMusicDB.startDuration, function()
-                ns.StopCurrentMusic()
-            end)
-        end
-    end
-end
-
--- 播放结束音频
-function ns.PlayEndMusic()
-    if not BLMusicDB.enabled then
-        return
-    end
-
-    ns.StopCurrentMusic()
-
-    local file = BLMusicDB.endMusicFile
-    if not file or file == "" then
-        return
-    end
-
-    local path
-    if file == "456.mp3" then
+    elseif file == "456.mp3" then
         path = "Interface\\456.mp3"
     elseif file == "456.ogg" then
         path = "Interface\\456.ogg"
@@ -97,11 +77,33 @@ function ns.PlayEndMusic()
     local _, handle = PlaySoundFile(path, BLMusicDB.channel or "Master")
     if handle then
         soundHandle = handle
-        if BLMusicDB.endDuration and BLMusicDB.endDuration > 0 then
-            stopTimer = C_Timer.NewTimer(BLMusicDB.endDuration, function()
+        if duration and duration > 0 then
+            stopTimer = C_Timer.NewTimer(duration, function()
                 ns.StopCurrentMusic()
             end)
         end
+    end
+end
+
+-- 播放开始音频（从选中的音频中随机选取）
+function ns.PlayStartMusic()
+    if not BLMusicDB.enabled then
+        return
+    end
+    local file = ns.GetRandomPathFromSelected(BLMusicDB.startMusicFiles)
+    if file then
+        ns.PlayMusicFile(file, BLMusicDB.startDuration)
+    end
+end
+
+-- 播放结束音频（从选中的音频中随机选取）
+function ns.PlayEndMusic()
+    if not BLMusicDB.enabled then
+        return
+    end
+    local file = ns.GetRandomPathFromSelected(BLMusicDB.endMusicFiles)
+    if file then
+        ns.PlayMusicFile(file, BLMusicDB.endDuration)
     end
 end
 -- 当前活跃的嗜血 auraInstanceID（同一时间只会存在一个）
