@@ -15,8 +15,8 @@ ns.L = {
 
     -- 试听
     ["试听"] = "试听",
-    ["选择音频时试听"] = "选择音频时试听",
-    ["在下拉菜单中选择音频文件时自动试听"] = "在下拉菜单中选择音频文件时自动试听",
+    ["试听开始"] = "试听开始",
+    ["试听可用"] = "试听可用",
 
     -- 停止播放
     ["停止播放"] = "停止播放",
@@ -31,6 +31,10 @@ ns.L = {
     ["可用时音频最多播放多少秒后自动停止"] = "可用时音频最多播放多少秒后自动停止",
     ["可用时音频"] = "可用时音频",
     ["嗜血可用时播放的音频文件"] = "嗜血可用时播放的音频文件",
+    ["已选择"] = "已选择",
+    ["选择开始音频"] = "选择开始音频",
+    ["选择可用音频"] = "选择可用音频",
+    ["多选提示"] = "选择多个时随机播放",
 
     -- 自定义音频
     ["自定义音频"] = "自定义音频",
@@ -62,8 +66,8 @@ if GetLocale() ~= "zhCN" and GetLocale() ~= "zhTW" then
         ["选择音频播放的通道"] = "Select audio output channel",
 
         ["试听"] = "Preview",
-        ["选择音频时试听"] = "Preview on Select",
-        ["在下拉菜单中选择音频文件时自动试听"] = "Auto-play audio when selecting from dropdown",
+        ["试听开始"] = "Preview Start",
+        ["试听可用"] = "Preview End",
 
         ["停止播放"] = "Stop Playing",
 
@@ -76,6 +80,10 @@ if GetLocale() ~= "zhCN" and GetLocale() ~= "zhTW" then
         ["可用时音频最多播放多少秒后自动停止"] = "Max seconds to play end music before auto-stop",
         ["可用时音频"] = "End Music",
         ["嗜血可用时播放的音频文件"] = "Audio to play when Bloodlust fades",
+        ["已选择"] = "Selected",
+        ["选择开始音频"] = "Select Start Audio",
+        ["选择可用音频"] = "Select End Audio",
+        ["多选提示"] = "Random play when multiple selected",
 
         ["自定义音频"] = "Custom Audio",
 
