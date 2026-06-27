@@ -189,22 +189,29 @@ local previewInit = CreateSettingsButtonInitializer(
     nil, true)
 if previewInit.InitFrame then
     hooksecurefunc(previewInit, "InitFrame", function(_, frame)
-        if frame.Button then
-            frame.Button:Hide()
-            if not frame.blmPreviewRow then
-                frame.blmPreviewRow = true
-                local btn1 = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
-                btn1:SetPoint("LEFT", 277, 0)
-                btn1:SetSize(100, 24)
-                btn1:SetText(ns.L["试听开始"])
-                btn1:SetScript("OnClick", function() ns.PlayStartMusic() end)
-                local btn2 = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
-                btn2:SetPoint("LEFT", 377, 0)
-                btn2:SetSize(100, 24)
-                btn2:SetText(ns.L["试听可用"])
-                btn2:SetScript("OnClick", function() ns.PlayEndMusic() end)
-            end
+        if not frame.Button then return end
+        frame.Button:Hide()
+        if not frame.blmPreviewRow then
+            frame.blmPreviewRow = true
+            frame.btn1 = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+            frame.btn1:SetPoint("LEFT", 277, 0)
+            frame.btn1:SetSize(100, 24)
+            frame.btn1:SetText(ns.L["试听开始"])
+            frame.btn1:SetScript("OnClick", function() ns.PlayStartMusic() end)
+            frame.btn2 = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+            frame.btn2:SetPoint("LEFT", 377, 0)
+            frame.btn2:SetSize(100, 24)
+            frame.btn2:SetText(ns.L["试听可用"])
+            frame.btn2:SetScript("OnClick", function() ns.PlayEndMusic() end)
+            -- 框架回收时隐藏按钮，防止挂到别的选项上
+            frame:HookScript("OnHide", function()
+                if frame.btn1 then frame.btn1:Hide() end
+                if frame.btn2 then frame.btn2:Hide() end
+            end)
         end
+        -- 每次展示时重新显示
+        frame.btn1:Show()
+        frame.btn2:Show()
     end)
 end
 layout:AddInitializer(previewInit)
@@ -293,6 +300,8 @@ local function CreateMultiSelectDropdown(frame, dbKey, audioList, durationField)
             end
         end,
         unpack(entries, 1, #entries))
+
+    return dropdown
 end
 
 -- 开始音乐多选
@@ -305,10 +314,15 @@ do
         true)
     if init.InitFrame then
         hooksecurefunc(init, "InitFrame", function(_, frame)
-            if frame.Button then
-                frame.Button:Hide()
-                CreateMultiSelectDropdown(frame, "startMusicFiles", ns.start, "startDuration")
+            if not frame.Button then return end
+            frame.Button:Hide()
+            if not frame.blmDropdown then
+                frame.blmDropdown = CreateMultiSelectDropdown(frame, "startMusicFiles", ns.start, "startDuration")
+                frame:HookScript("OnHide", function()
+                    if frame.blmDropdown then frame.blmDropdown:Hide() end
+                end)
             end
+            frame.blmDropdown:Show()
         end)
     end
     layout:AddInitializer(init)
@@ -338,10 +352,15 @@ do
         true)
     if init.InitFrame then
         hooksecurefunc(init, "InitFrame", function(_, frame)
-            if frame.Button then
-                frame.Button:Hide()
-                CreateMultiSelectDropdown(frame, "endMusicFiles", ns["end"], "endDuration")
+            if not frame.Button then return end
+            frame.Button:Hide()
+            if not frame.blmDropdown then
+                frame.blmDropdown = CreateMultiSelectDropdown(frame, "endMusicFiles", ns["end"], "endDuration")
+                frame:HookScript("OnHide", function()
+                    if frame.blmDropdown then frame.blmDropdown:Hide() end
+                end)
             end
+            frame.blmDropdown:Show()
         end)
     end
     layout:AddInitializer(init)
