@@ -66,9 +66,8 @@ end
 local defaults = {
     enabled = true,
     channel = "Master",
-    startMusicFile = "",
-    endMusicFile = "",
-    previewOnSelect = true,
+    startMusicFiles = {},
+    endMusicFiles = {},
     startDuration = 40,
     endDuration = 10,
 }
@@ -182,18 +181,33 @@ end
 
 layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(ns.L["试听"]))
 
-do
-    local setting = Settings.RegisterProxySetting(category, "BLMUSIC_PREVIEW",
-        Settings.VarType.Boolean, ns.L["选择音频时试听"], Settings.Default.True,
-        function() return BLMusicDB.previewOnSelect end,
-        function(value) BLMusicDB.previewOnSelect = value end)
-    setting:SetValueChangedCallback(function()
-        if BLMusicDB.previewOnSelect then
-            ns.PlayStartMusic()
+-- 试听（一行两个按钮）
+local previewInit = CreateSettingsButtonInitializer(
+    ns.L["试听"],
+    " ",
+    function() end,
+    nil, true)
+if previewInit.InitFrame then
+    hooksecurefunc(previewInit, "InitFrame", function(_, frame)
+        if frame.Button then
+            frame.Button:Hide()
+            if not frame.blmPreviewRow then
+                frame.blmPreviewRow = true
+                local btn1 = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+                btn1:SetPoint("LEFT", 277, 0)
+                btn1:SetSize(100, 24)
+                btn1:SetText(ns.L["试听开始"])
+                btn1:SetScript("OnClick", function() ns.PlayStartMusic() end)
+                local btn2 = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+                btn2:SetPoint("LEFT", 377, 0)
+                btn2:SetSize(100, 24)
+                btn2:SetText(ns.L["试听可用"])
+                btn2:SetScript("OnClick", function() ns.PlayEndMusic() end)
+            end
         end
     end)
-    Settings.CreateCheckbox(category, setting, ns.L["在下拉菜单中选择音频文件时自动试听"])
 end
+layout:AddInitializer(previewInit)
 
 local stopBtnInit = CreateSettingsButtonInitializer(
     ns.L["停止播放"],
@@ -225,27 +239,79 @@ do
     Settings.CreateSlider(category, setting, options, ns.L["开始时音频最多播放多少秒后自动停止"])
 end
 
--- 开始音乐文件路径
-do
-    local setting = Settings.RegisterProxySetting(category, "BLMUSIC_MUSICFILE",
-        Settings.VarType.String, ns.L["开始时音频"], defaults.startMusicFile,
-        function() return BLMusicDB.startMusicFile end,
-        function(value) BLMusicDB.startMusicFile = value end)
-    setting:SetValueChangedCallback(function()
-        if BLMusicDB.previewOnSelect then
-            ns.PlayStartMusic()
-        end
+-- 创建多选下拉按钮（Blizzard_Menu DropdownButton + CreateCheckboxMenu）
+local function CreateMultiSelectDropdown(frame, dbKey, audioList, durationField)
+    local dropdown = CreateFrame("DropdownButton", nil, frame, "WowStyle1DropdownTemplate")
+    dropdown:SetPoint("LEFT", 245, 0)
+    dropdown:SetWidth(260)
+    dropdown:SetHeight(24)
+    dropdown:SetDefaultText(DISABLE)
+    dropdown:SetScript("OnEnter", function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_TOP")
+        GameTooltip:SetText(ns.L["多选提示"])
+        GameTooltip:Show()
+    end)
+    dropdown:SetScript("OnLeave", function()
+        GameTooltip:Hide()
     end)
 
-    -- 用下拉菜单选择预设路径
-    local function GetOptions()
-        local container = Settings.CreateControlTextContainer()
-        for _, v in ipairs(ns.start) do
-            container:Add(v.path, v.name, v.tip)
+    -- 自定义选中文本显示
+    dropdown:SetSelectionText(function()
+        local count = 0
+        local tbl = BLMusicDB[dbKey]
+        if tbl then
+            for _ in pairs(tbl) do count = count + 1 end
         end
-        return container:GetData()
+        if count == 0 then return DISABLE end
+        return ns.L["已选择"] .. " " .. count
+    end)
+
+    -- 组装条目列表
+    local entries = {}
+    for _, v in ipairs(audioList) do
+        if v.path ~= "" then
+            tinsert(entries, {v.name, v.path})
+        end
     end
-    Settings.CreateDropdown(category, setting, GetOptions, ns.L["嗜血开始时播放的音频文件"])
+
+    MenuUtil.CreateCheckboxMenu(dropdown,
+        function(path) return BLMusicDB[dbKey] and BLMusicDB[dbKey][path] end,
+        function(path)
+            local wasChecked = BLMusicDB[dbKey] and BLMusicDB[dbKey][path]
+            if wasChecked then
+                BLMusicDB[dbKey][path] = nil
+                if next(BLMusicDB[dbKey]) == nil then
+                    BLMusicDB[dbKey] = nil
+                end
+                ns.StopCurrentMusic()
+            else
+                if not BLMusicDB[dbKey] then
+                    BLMusicDB[dbKey] = {}
+                end
+                BLMusicDB[dbKey][path] = true
+                ns.PlayMusicFile(path, BLMusicDB[durationField])
+            end
+        end,
+        unpack(entries, 1, #entries))
+end
+
+-- 开始音乐多选
+do
+    local init = CreateSettingsButtonInitializer(
+        ns.L["选择开始音频"],
+        " ",
+        function() end,
+        ns.L["嗜血开始时播放的音频文件"],
+        true)
+    if init.InitFrame then
+        hooksecurefunc(init, "InitFrame", function(_, frame)
+            if frame.Button then
+                frame.Button:Hide()
+                CreateMultiSelectDropdown(frame, "startMusicFiles", ns.start, "startDuration")
+            end
+        end)
+    end
+    layout:AddInitializer(init)
 end
 
 -- 可用时音频持续时间
@@ -262,26 +328,23 @@ do
     Settings.CreateSlider(category, setting, options, ns.L["可用时音频最多播放多少秒后自动停止"])
 end
 
--- 可用时音频文件路径
+-- 可用时音频多选
 do
-    local setting = Settings.RegisterProxySetting(category, "BLMUSIC_ENDMUSICFILE",
-        Settings.VarType.String, ns.L["可用时音频"], defaults.endMusicFile,
-        function() return BLMusicDB.endMusicFile end,
-        function(value) BLMusicDB.endMusicFile = value end)
-    setting:SetValueChangedCallback(function()
-        if BLMusicDB.previewOnSelect then
-            ns.PlayEndMusic()
-        end
-    end)
-
-    local function GetOptions()
-        local container = Settings.CreateControlTextContainer()
-        for _, v in ipairs(ns["end"]) do
-            container:Add(v.path, v.name, v.tip)
-        end
-        return container:GetData()
+    local init = CreateSettingsButtonInitializer(
+        ns.L["选择可用音频"],
+        " ",
+        function() end,
+        ns.L["嗜血可用时播放的音频文件"],
+        true)
+    if init.InitFrame then
+        hooksecurefunc(init, "InitFrame", function(_, frame)
+            if frame.Button then
+                frame.Button:Hide()
+                CreateMultiSelectDropdown(frame, "endMusicFiles", ns["end"], "endDuration")
+            end
+        end)
     end
-    Settings.CreateDropdown(category, setting, GetOptions, ns.L["嗜血可用时播放的音频文件"])
+    layout:AddInitializer(init)
 end
 
 layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(ns.L["自定义音频"]))
