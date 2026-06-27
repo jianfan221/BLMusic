@@ -17,7 +17,9 @@ Auto-play music during Bloodlust / Heroism / Time Warp
 - Independent duration control for start and end music
 - Audio channel selection: Master, Music, SFX, Ambience, Dialog
 - Built-in volume slider per channel
-- Preview on select — hear audio instantly when choosing a file from dropdown
+- Multi-select dropdown — choose multiple audio files, random playback each time
+- Preview on click — instantly preview a file by selecting it in the dropdown
+- Standalone preview buttons for start and end music
 - Stops playback automatically on player death
 - Stops playback on UI reload or logout
 - Clean Blizzard settings panel (`/bl` or `/blm`)
@@ -32,7 +34,7 @@ Auto-play music during Bloodlust / Heroism / Time Warp
 ## How to Use
 
 1. Install the addon and type `/bl` to open settings
-2. Choose your start and end music files from the dropdowns
+2. Select start and end music files from the multi-select dropdowns (choose multiple for random playback)
 3. Set playback duration for each (how many seconds before auto-stop)
 4. Optionally select audio channel and adjust volume
 5. Next time Bloodlust/Heroism/Time Warp is cast in your group, the music plays automatically!
@@ -50,14 +52,15 @@ Auto-play music during Bloodlust / Heroism / Time Warp
 - 开始音频和结束音频**可分别设置播放时长**
 - 音频通道可选：主音量 / 音乐 / 音效 / 环境 / 对话
 - **内置音量滑块**，快速调节当前通道音量
-- **试听模式**：选择音频文件时自动播放预览
+- **多选模式**：可同时选择多个音频文件，播放时随机选取
+- **试听模式**：勾选时自动播放预览，也可通过独立试听按钮播放
 - 死亡时自动停止播放，重载/退出时自动停止
 - 使用暴雪原生设置面板，简洁轻量
 
 ## 使用方法
 
 1. 安装插件后输入 `/bl` 打开设置界面
-2. 分别选择嗜血开始时和可用时的音频文件
+2. 从多选下拉菜单中分别选择开始/可用时音频（可多选，随机播放）
 3. 设置各自的播放时长（多少秒后自动停止）
 4. 可选音频通道和音量
 5. 下次团队开嗜血/英勇时，音乐自动响起！
