@@ -281,25 +281,33 @@ local function CreateMultiSelectDropdown(frame, dbKey, audioList, durationField)
         end
     end
 
-    MenuUtil.CreateCheckboxMenu(dropdown,
-        function(path) return BLMusicDB[dbKey] and BLMusicDB[dbKey][path] end,
-        function(path)
-            local wasChecked = BLMusicDB[dbKey] and BLMusicDB[dbKey][path]
-            if wasChecked then
-                BLMusicDB[dbKey][path] = nil
-                if next(BLMusicDB[dbKey]) == nil then
-                    BLMusicDB[dbKey] = nil
-                end
-                ns.StopCurrentMusic()
-            else
-                if not BLMusicDB[dbKey] then
-                    BLMusicDB[dbKey] = {}
-                end
-                BLMusicDB[dbKey][path] = true
-                ns.PlayMusicFile(path, BLMusicDB[durationField])
-            end
-        end,
-        unpack(entries, 1, #entries))
+    -- 用 SetupMenu 替代 CreateCheckboxMenu，支持滚动模式限制最大显示行数
+    dropdown:SetupMenu(function(_, rootDescription)
+        rootDescription:SetScrollMode(260)
+
+        for _, item in ipairs(entries) do
+            local name, path = item[1], item[2]
+            rootDescription:CreateCheckbox(name,
+                function() return BLMusicDB[dbKey] and BLMusicDB[dbKey][path] end,
+                function()
+                    local wasChecked = BLMusicDB[dbKey] and BLMusicDB[dbKey][path]
+                    if wasChecked then
+                        BLMusicDB[dbKey][path] = nil
+                        if next(BLMusicDB[dbKey]) == nil then
+                            BLMusicDB[dbKey] = nil
+                        end
+                        ns.StopCurrentMusic()
+                    else
+                        if not BLMusicDB[dbKey] then
+                            BLMusicDB[dbKey] = {}
+                        end
+                        BLMusicDB[dbKey][path] = true
+                        ns.PlayMusicFile(path, BLMusicDB[durationField])
+                    end
+                end,
+                path)
+        end
+    end)
 
     return dropdown
 end
