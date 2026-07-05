@@ -41,6 +41,8 @@ ns["end"] = {
     { path = "456.ogg", name = CUSTOM.."  Interface\\456.ogg" },
     { path = "Magic.mp3", name = "Magic" },
     { path = "Elf.mp3", name = "Elf" },
+    { path = "didi.mp3", name = "didi" },
+    { path = "bonus time.mp3", name = "Bonus time" },
 }
 --中文结束音频仅对中文用户显示
 if locale then
