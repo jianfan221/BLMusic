@@ -41,6 +41,11 @@ EventRegistry:RegisterFrameEventAndCallback("PLAYER_LEAVING_WORLD", function()
     ns.StopCurrentMusic()
 end)
 --关闭设置界面时停止,防止存在试听
+if SettingsPanel then
+    SettingsPanel:HookScript("OnHide", function()
+        ns.StopCurrentMusic()
+    end)
+end
 SettingsPanel:HookScript("OnHide", function()
     ns.StopCurrentMusic()
 end)
@@ -106,11 +111,11 @@ function ns.PlayEndMusic()
         ns.PlayMusicFile(file, BLMusicDB.endDuration)
     end
 end
--- 当前活跃的嗜血 auraInstanceID（同一时间只会存在一个）
-local activeAuraInstanceID
 
--- 初始扫描：进入世界时检查是否已有嗜血 debuff（如重载前就在）
-EventRegistry:RegisterFrameEventAndCallback("PLAYER_ENTERING_WORLD", function()
+-- 当前活跃的嗜血 auraInstanceID（同一时间只会存在一个）
+local activeAuraInstanceID = nil
+
+local function UpdateAll()
     activeAuraInstanceID = nil
     for spellID in pairs(BLOODLUST_DEBUFFS) do
         local aura = C_UnitAuras.GetUnitAuraBySpellID("player", spellID)
@@ -119,12 +124,22 @@ EventRegistry:RegisterFrameEventAndCallback("PLAYER_ENTERING_WORLD", function()
             return
         end
     end
+end
+
+-- 初始扫描：进入世界时检查是否已有嗜血 debuff（如重载前就在）
+EventRegistry:RegisterFrameEventAndCallback("PLAYER_ENTERING_WORLD", function()
+    UpdateAll()
 end)
 
 -- UNIT_AURA 回调: 检测嗜血类 buff 到达/结束
 EventRegistry:RegisterFrameEventAndCallback("UNIT_AURA", function(event, unit, updateInfo)
     if unit ~= "player" or not updateInfo then
         return
+    end
+
+    -- isFullUpdate: 完整更新
+    if updateInfo.isFullUpdate then
+        UpdateAll()
     end
 
     -- 新增 debuff → 播开始音频（跳过秘密值 spellId，无法判断）
@@ -135,7 +150,6 @@ EventRegistry:RegisterFrameEventAndCallback("UNIT_AURA", function(event, unit, u
                 if (aura.expirationTime - GetTime()) > 595 then
                     ns.PlayStartMusic()
                 end
-                return
             end
         end
     end
@@ -146,7 +160,6 @@ EventRegistry:RegisterFrameEventAndCallback("UNIT_AURA", function(event, unit, u
             if id == activeAuraInstanceID then
                 activeAuraInstanceID = nil
                 ns.PlayEndMusic()
-                return
             end
         end
     end
