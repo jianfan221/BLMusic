@@ -23,17 +23,21 @@ ns.L = {
 
     -- 选择音频
     ["选择音频"] = "选择音频",
-    ["开始音频持续时间"] = "开始音频持续时间",
-    ["开始时音频最多播放多少秒后自动停止"] = "开始时音频最多播放多少秒后自动停止",
-    ["开始时音频"] = "开始时音频",
-    ["嗜血开始时播放的音频文件"] = "嗜血开始时播放的音频文件",
-    ["可用音频持续时间"] = "可用音频持续时间",
-    ["可用时音频最多播放多少秒后自动停止"] = "可用时音频最多播放多少秒后自动停止",
-    ["可用时音频"] = "可用时音频",
-    ["嗜血可用时播放的音频文件"] = "嗜血可用时播放的音频文件",
+
+    -- 嗜血开始音频
+    ["嗜血开始音频持续时间"] = "嗜血开始音频持续时间",
+    ["嗜血开始音频最多播放多少秒后自动停止"] = "嗜血开始音频最多播放多少秒后自动停止",
+    ["嗜血开始音频"] = "嗜血开始音频",
+    ["嗜血开始音频播放的音频文件"] = "嗜血开始音频播放的音频文件",
+
+    -- 嗜血好了音频
+    ["嗜血好了音频持续时间"] = "嗜血好了音频持续时间",
+    ["嗜血好了音频最多播放多少秒后自动停止"] = "嗜血好了音频最多播放多少秒后自动停止",
+    ["嗜血好了音频"] = "嗜血好了音频",
+    ["嗜血好了音频播放的音频文件"] = "嗜血好了音频播放的音频文件",
+
+    -- 多选
     ["已选择"] = "已选择",
-    ["选择开始音频"] = "选择开始音频",
-    ["选择可用音频"] = "选择可用音频",
     ["多选提示"] = "选择多个时随机播放",
 
     -- 自定义音频
@@ -57,39 +61,51 @@ GitHub:https://github.com/jianfan221/BLMusic
 -- 英语（非中文环境使用）
 if GetLocale() ~= "zhCN" and GetLocale() ~= "zhTW" then
     ns.L = {
+        -- 插件描述
         ["简单便捷的嗜血播放音频插件"] = "Simple Bloodlust music addon",
         ["/bl 或 /blm 打开此界面"] = "/bl or /blm to open settings",
 
+        -- 音量与通道
         ["当前通道音量"] = "Current Channel Volume",
         ["当前音频通道的音量和快捷调整"] = "Volume of the current audio channel",
         ["音频通道"] = "Audio Channel",
         ["选择音频播放的通道"] = "Select audio output channel",
 
+        -- 试听
         ["试听"] = "Preview",
         ["试听开始"] = "Preview Start",
         ["试听可用"] = "Preview End",
 
+        -- 停止播放
         ["停止播放"] = "Stop Playing",
 
+        -- 选择音频
         ["选择音频"] = "Select Audio",
-        ["开始音频持续时间"] = "Start Music Duration",
-        ["开始时音频最多播放多少秒后自动停止"] = "Max seconds to play start music before auto-stop",
-        ["开始时音频"] = "Start Music",
-        ["嗜血开始时播放的音频文件"] = "Audio to play when Bloodlust starts",
-        ["可用音频持续时间"] = "End Music Duration",
-        ["可用时音频最多播放多少秒后自动停止"] = "Max seconds to play end music before auto-stop",
-        ["可用时音频"] = "End Music",
-        ["嗜血可用时播放的音频文件"] = "Audio to play when Bloodlust fades",
+
+        -- 嗜血开始音频
+        ["嗜血开始音频持续时间"] = "BL Start Audio Duration",
+        ["嗜血开始音频最多播放多少秒后自动停止"] = "Max seconds for Bloodlust start audio before auto-stop",
+        ["嗜血开始音频"] = "BL Start Audio",
+        ["嗜血开始音频播放的音频文件"] = "Audio file for Bloodlust start",
+
+        -- 嗜血好了音频
+        ["嗜血好了音频持续时间"] = "BL Ready Audio Duration",
+        ["嗜血好了音频最多播放多少秒后自动停止"] = "Max seconds for Bloodlust ready audio before auto-stop",
+        ["嗜血好了音频"] = "BL Ready Audio",
+        ["嗜血好了音频播放的音频文件"] = "Audio file for Bloodlust ready",
+
+        -- 多选
         ["已选择"] = "Selected",
-        ["选择开始音频"] = "Select Start Audio",
-        ["选择可用音频"] = "Select End Audio",
         ["多选提示"] = "Random play when multiple selected",
 
+        -- 自定义音频
         ["自定义音频"] = "Custom Audio",
 
+        -- 联系作者
         ["联系作者"] = "Contact Author",
         ["打开"] = "Open",
 
+        -- 联系弹窗内容
         ["联系弹窗内容"] = [[
 GitHub:https://github.com/jianfan221/BLMusic
 Please attach the audio file
