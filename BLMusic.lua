@@ -31,6 +31,7 @@ function ns.StopCurrentMusic()
         soundHandle = nil
     end
 end
+
 --死亡时停止
 EventRegistry:RegisterFrameEventAndCallback("PLAYER_DEAD", function()
     ns.StopCurrentMusic()
@@ -40,15 +41,13 @@ end)
 EventRegistry:RegisterFrameEventAndCallback("PLAYER_LEAVING_WORLD", function()
     ns.StopCurrentMusic()
 end)
+
 --关闭设置界面时停止,防止存在试听
 if SettingsPanel then
     SettingsPanel:HookScript("OnHide", function()
         ns.StopCurrentMusic()
     end)
 end
-SettingsPanel:HookScript("OnHide", function()
-    ns.StopCurrentMusic()
-end)
 
 -- 从选中的音频 table 中随机取一个路径
 function ns.GetRandomPathFromSelected(selectedTbl)
@@ -126,24 +125,24 @@ local function UpdateAll()
     end
 end
 
--- 初始扫描：进入世界时检查是否已有嗜血 debuff（如重载前就在）
+-- 初始扫描：检查是否已有嗜血 debuff
 EventRegistry:RegisterFrameEventAndCallback("PLAYER_ENTERING_WORLD", function()
     UpdateAll()
 end)
 
--- UNIT_AURA 回调: 检测嗜血类 buff 到达/结束
+-- UNIT_AURA 回调
 EventRegistry:RegisterFrameEventAndCallback("UNIT_AURA", function(event, unit, updateInfo)
     if unit ~= "player" or not updateInfo then
         return
     end
 
-    -- isFullUpdate: 完整更新
+    -- 完整更新 → 检查是否已有嗜血 debuff
     if updateInfo.isFullUpdate then
         UpdateAll()
     end
 
-    -- 新增 debuff → 播开始音频（跳过秘密值 spellId，无法判断）
-    if updateInfo.addedAuras then
+    -- 新增 debuff → 播开始音频
+    if updateInfo.addedAuras and not activeAuraInstanceID then
         for _, aura in ipairs(updateInfo.addedAuras) do
             if (not issecretvalue or not issecretvalue(aura.spellId)) and BLOODLUST_DEBUFFS[aura.spellId] then
                 activeAuraInstanceID = aura.auraInstanceID
