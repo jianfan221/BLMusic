@@ -26,12 +26,14 @@ ns.start = {
     { path = "luffy attack.mp3", name = "Luffy attack" },   --提供者:蘑菇小射手-无尽之海
     { path = "luffy's fierce attack.mp3", name = "Luffy's fierce attack" },   --提供者:蘑菇小射手-无尽之海
     { path = "shumabaobei.mp3", name = T("数码宝贝 Brave Heart", "Digimon Brave Heart") },
+    { path = "ikun.mp3", name = "ikun" },
 }
 --中文开始音频仅对中文用户显示
 if locale then
     tinsert(ns.start, { path = "lulustar.ogg", name = "【露露】恶龙咆哮，嗷呜~" })
     tinsert(ns.start, { path = "nana7mistar.ogg", name = "【Nana7mi】嗷呜~嗷呜~" })
     tinsert(ns.start, { path = "xin2sq.mp3", name = "新二神曲" })
+    tinsert(ns.start, { path = "elong.ogg", name = "将军小曲" })
 end
 
 -- 结束音乐
