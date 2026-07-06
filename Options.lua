@@ -240,10 +240,10 @@ do
     end)
 
     local setting = Settings.RegisterProxySetting(category, "BLMUSIC_DURATION",
-        Settings.VarType.Number, ns.L["开始音频持续时间"], defaults.startDuration,
+        Settings.VarType.Number, ns.L["嗜血开始音频持续时间"], defaults.startDuration,
         function() return BLMusicDB.startDuration end,
         function(value) BLMusicDB.startDuration = value end)
-    Settings.CreateSlider(category, setting, options, ns.L["开始时音频最多播放多少秒后自动停止"])
+    Settings.CreateSlider(category, setting, options, ns.L["嗜血开始音频最多播放多少秒后自动停止"])
 end
 
 -- 创建多选下拉按钮（Blizzard_Menu DropdownButton + CreateCheckboxMenu）
@@ -315,10 +315,10 @@ end
 -- 开始音乐多选
 do
     local init = CreateSettingsButtonInitializer(
-        ns.L["选择开始音频"],
+        ns.L["嗜血开始音频"],
         " ",
         function() end,
-        ns.L["嗜血开始时播放的音频文件"],
+        ns.L["嗜血开始音频播放的音频文件"],
         true)
     if init.InitFrame then
         hooksecurefunc(init, "InitFrame", function(_, frame)
@@ -344,19 +344,19 @@ do
     end)
 
     local setting = Settings.RegisterProxySetting(category, "BLMUSIC_ENDDURATION",
-        Settings.VarType.Number, ns.L["可用音频持续时间"], defaults.endDuration,
+        Settings.VarType.Number, ns.L["嗜血好了音频持续时间"], defaults.endDuration,
         function() return BLMusicDB.endDuration end,
         function(value) BLMusicDB.endDuration = value end)
-    Settings.CreateSlider(category, setting, options, ns.L["可用时音频最多播放多少秒后自动停止"])
+    Settings.CreateSlider(category, setting, options, ns.L["嗜血好了音频最多播放多少秒后自动停止"])
 end
 
 -- 可用时音频多选
 do
     local init = CreateSettingsButtonInitializer(
-        ns.L["选择可用音频"],
+        ns.L["嗜血好了音频"],
         " ",
         function() end,
-        ns.L["嗜血可用时播放的音频文件"],
+        ns.L["嗜血好了音频播放的音频文件"],
         true)
     if init.InitFrame then
         hooksecurefunc(init, "InitFrame", function(_, frame)
