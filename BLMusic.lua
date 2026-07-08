@@ -111,55 +111,41 @@ function ns.PlayEndMusic()
     end
 end
 
--- 当前活跃的嗜血 auraInstanceID（同一时间只会存在一个）
-local activeAuraInstanceID = nil
+-- 当前是否有嗜血 debuff
+local hasBloodlust = nil  -- nil=未知, true=有, false=无
 
-local function UpdateAll()
-    activeAuraInstanceID = nil
+local function CheckBloodlustExpiration()
     for spellID in pairs(BLOODLUST_DEBUFFS) do
-        local aura = C_UnitAuras.GetUnitAuraBySpellID("player", spellID)
-        if aura and (not issecretvalue or not issecretvalue(aura.spellId)) then
-            activeAuraInstanceID = aura.auraInstanceID
-            return
+        local aura = C_UnitAuras.GetPlayerAuraBySpellID(spellID)
+        if aura and aura.expirationTime then
+            return aura.expirationTime - GetTime()
         end
     end
+    return nil
 end
 
 -- 初始扫描：检查是否已有嗜血 debuff
 EventRegistry:RegisterFrameEventAndCallback("PLAYER_ENTERING_WORLD", function()
-    UpdateAll()
+    local remaining = CheckBloodlustExpiration()
+    hasBloodlust = remaining ~= nil
 end)
 
--- UNIT_AURA 回调
-EventRegistry:RegisterFrameEventAndCallback("UNIT_AURA", function(event, unit, updateInfo)
-    if unit ~= "player" or not updateInfo then
+-- UNIT_AURA 回调（12.1 起不读取 updateInfo 载荷）
+EventRegistry:RegisterFrameEventAndCallback("UNIT_AURA", function(event, unit)
+    if unit ~= "player" then
         return
     end
 
-    -- 完整更新 → 检查是否已有嗜血 debuff
-    if updateInfo.isFullUpdate then
-        UpdateAll()
+    local remaining = CheckBloodlustExpiration()
+    local now = remaining ~= nil
+    if now == hasBloodlust then
+        return
     end
 
-    -- 新增 debuff → 播开始音频
-    if updateInfo.addedAuras and not activeAuraInstanceID then
-        for _, aura in ipairs(updateInfo.addedAuras) do
-            if (not issecretvalue or not issecretvalue(aura.spellId)) and BLOODLUST_DEBUFFS[aura.spellId] then
-                activeAuraInstanceID = aura.auraInstanceID
-                if (aura.expirationTime - GetTime()) > 595 then
-                    ns.PlayStartMusic()
-                end
-            end
-        end
-    end
-
-    -- 移除 debuff → 播结束音频
-    if updateInfo.removedAuraInstanceIDs and activeAuraInstanceID then
-        for _, id in ipairs(updateInfo.removedAuraInstanceIDs) do
-            if id == activeAuraInstanceID then
-                activeAuraInstanceID = nil
-                ns.PlayEndMusic()
-            end
-        end
+    hasBloodlust = now
+    if now and remaining and remaining > 595 then
+        ns.PlayStartMusic()
+    elseif not now then
+        ns.PlayEndMusic()
     end
 end)
