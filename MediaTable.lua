@@ -52,3 +52,14 @@ if locale then
     tinsert(ns["end"], { path = "nana7miend.ogg", name = "【Nana7mi】嗜血好啦" })
 end
 
+-- 能量灌注音频
+ns.pi = {
+    { path = "", name = DISABLE },
+    { path = "pi-powerinfusion.mp3", name = "Power Infusion" },
+    { path = "pi-lulu-Pirorirorin.ogg", name = T("【露露】Pirorirorin", "lulu - Pirorirorin") },
+    { path = "pi-lulu-Wakuwaku.ogg", name = T("【露露】Wakuwaku", "lulu - Wakuwaku") },
+}
+if locale then
+    tinsert(ns.pi, { path = "pi-jingjing.mp3", name = "【静静】能量灌注" })
+end
+
