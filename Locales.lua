@@ -40,6 +40,10 @@ ns.L = {
     ["已选择"] = "已选择",
     ["多选提示"] = "选择多个时随机播放",
 
+    -- 能量灌注
+    ["能量灌注音频"] = "能量灌注音频",
+    ["能量灌注音频播放的音频文件"] = "获得能量灌注时播放的音频文件",
+
     -- 自定义音频
     ["自定义音频"] = "自定义音频",
 
@@ -97,6 +101,10 @@ if GetLocale() ~= "zhCN" and GetLocale() ~= "zhTW" then
         -- 多选
         ["已选择"] = "Selected",
         ["多选提示"] = "Random play when multiple selected",
+
+        -- 能量灌注
+        ["能量灌注音频"] = "Power Infusion Audio",
+        ["能量灌注音频播放的音频文件"] = "Audio file played when Power Infusion is received",
 
         -- 自定义音频
         ["自定义音频"] = "Custom Audio",
