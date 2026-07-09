@@ -70,6 +70,7 @@ local defaults = {
     endMusicFiles = {},
     startDuration = 40,
     endDuration = 10,
+    piMusicFile = "",
 }
 
 -- 初始化 DB
@@ -372,6 +373,69 @@ do
         end)
     end
     layout:AddInitializer(init)
+end
+
+-- 能量灌注音频（仅 12.1+ 支持 AddAuraAppliedSound 时显示）
+if C_UnitAuras.AddAuraAppliedSound then
+    -- 能量灌注音频单选项
+    do
+        local init = CreateSettingsButtonInitializer(
+            "|cff96ff00" .. ns.L["能量灌注音频"] .. "|r",
+            " ",
+            function() end,
+            ns.L["能量灌注音频播放的音频文件"],
+            true)
+        if init.InitFrame then
+            hooksecurefunc(init, "InitFrame", function(_, frame)
+                if not frame.Button then return end
+                frame.Button:Hide()
+                if not frame.blmPiDropdown then
+                    frame.blmPiDropdown = CreateFrame("DropdownButton", nil, frame, "WowStyle1DropdownTemplate")
+                    frame.blmPiDropdown:SetPoint("LEFT", 245, 0)
+                    frame.blmPiDropdown:SetWidth(260)
+                    frame.blmPiDropdown:SetHeight(24)
+                    frame.blmPiDropdown:SetDefaultText(DISABLE)
+
+                    -- 显示当前选中（回调方式，自动刷新）
+                    frame.blmPiDropdown:SetSelectionText(function()
+                        local piPath = BLMusicDB.piMusicFile
+                        if piPath and piPath ~= "" then
+                            for _, v in ipairs(ns.pi) do
+                                if v.path == piPath then
+                                    return v.name
+                                end
+                            end
+                        end
+                        return DISABLE
+                    end)
+
+                    -- 构建菜单
+                    frame.blmPiDropdown:SetupMenu(function(_, rootDescription)
+                        rootDescription:SetScrollMode(260)
+                        for _, v in ipairs(ns.pi) do
+                            local name, path = v.name, v.path
+                            rootDescription:CreateButton(name, function()
+                                if path == "" then
+                                    BLMusicDB.piMusicFile = ""
+                                    ns.pisound()
+                                else
+                                    BLMusicDB.piMusicFile = path
+                                    ns.pisound(true)
+                                end
+                                CloseMenus()
+                            end, path)
+                        end
+                    end)
+
+                    frame:HookScript("OnHide", function()
+                        if frame.blmPiDropdown then frame.blmPiDropdown:Hide() end
+                    end)
+                end
+                frame.blmPiDropdown:Show()
+            end)
+        end
+        layout:AddInitializer(init)
+    end
 end
 
 layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(ns.L["自定义音频"]))
