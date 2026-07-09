@@ -124,10 +124,39 @@ local function CheckBloodlustExpiration()
     return nil
 end
 
+-- 注册能量灌注声音提醒
+local haspisound
+function ns.pisound(test)
+    if not C_UnitAuras.AddAuraAppliedSound then return end
+
+    -- 先移除旧注册
+    if haspisound then
+        C_UnitAuras.RemoveAuraAppliedSound(haspisound)
+        haspisound = nil
+    end
+
+    local pipath = BLMusicDB.piMusicFile
+    if not pipath or pipath == "" then
+        return
+    end
+
+    local fullPath = MUSIC_PATH .. pipath
+    if test then
+        PlaySoundFile(fullPath, BLMusicDB.channel or "Master")
+    end
+    haspisound = C_UnitAuras.AddAuraAppliedSound({
+        unitToken = "player",
+        spellID = 10060,  -- 能量灌注 (Power Infusion)
+        soundFileName = fullPath,
+        outputChannel = BLMusicDB.channel or "Master",
+    })
+end
+
 -- 初始扫描：检查是否已有嗜血 debuff
 EventRegistry:RegisterFrameEventAndCallback("PLAYER_ENTERING_WORLD", function()
     local remaining = CheckBloodlustExpiration()
     hasBloodlust = remaining ~= nil
+    ns.pisound()
 end)
 
 -- UNIT_AURA 回调（12.1 起不读取 updateInfo 载荷）
