@@ -27,6 +27,7 @@ ns.start = {
     { path = "luffy's fierce attack.mp3", name = "Luffy's fierce attack" },   --提供者:蘑菇小射手-无尽之海
     { path = "shumabaobei.mp3", name = T("数码宝贝 Brave Heart", "Digimon Brave Heart") },
     { path = "ikun.mp3", name = "ikun" },
+    { path = "manboNomore.mp3", name = "manboNomore" },--提供者Sins
 }
 --中文开始音频仅对中文用户显示
 if locale then
