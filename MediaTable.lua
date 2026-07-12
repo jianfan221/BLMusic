@@ -28,6 +28,7 @@ ns.start = {
     { path = "shumabaobei.mp3", name = T("数码宝贝 Brave Heart", "Digimon Brave Heart") },
     { path = "ikun.mp3", name = "ikun" },
     { path = "manboNomore.mp3", name = "manboNomore" },--提供者Sins
+    { path = "Sway to My Beat in Cosmos.mp3", name = T("在银河中孤独摇摆", "Sway to My Beat in Cosmos") },--提供者lzy
 }
 --中文开始音频仅对中文用户显示
 if locale then
