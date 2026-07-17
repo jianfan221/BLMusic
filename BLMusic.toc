@@ -6,7 +6,7 @@
 ## IconTexture: 458224
 ## X-ModUs-UID: 22
 ## SavedVariables: BLMusicDB
-## Version: 20260712
+## Version: 20260718
 
 BLMusic.lua
 MediaTable.lua
