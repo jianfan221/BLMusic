@@ -125,13 +125,25 @@ local function CheckBloodlustExpiration()
 end
 
 -- 注册能量灌注声音提醒
-local haspisound
+local haspisound    -- 已注册的音频 ID，用于移除旧注册
+local pisoundDeferred  -- 战斗中已推迟注册的标志
 function ns.pisound(test)
-    if not C_UnitAuras.AddAuraAppliedSound then return end
+    if not C_UnitAuras.AddAuraSound then return end
+
+    --战斗中推迟到脱战后执行
+    if not pisoundDeferred and UnitAffectingCombat("player") then
+        pisoundDeferred = true
+        EventRegistry:RegisterFrameEventAndCallback("PLAYER_REGEN_ENABLED", function(self)
+            EventRegistry:UnregisterFrameEventAndCallback("PLAYER_REGEN_ENABLED", self)
+            pisoundDeferred = false
+            ns.pisound(test)
+        end)
+        return
+    end
 
     -- 先移除旧注册
     if haspisound then
-        C_UnitAuras.RemoveAuraAppliedSound(haspisound)
+        C_UnitAuras.RemoveAuraSound(haspisound)
         haspisound = nil
     end
 
@@ -144,7 +156,7 @@ function ns.pisound(test)
     if test then
         PlaySoundFile(fullPath, BLMusicDB.channel or "Master")
     end
-    haspisound = C_UnitAuras.AddAuraAppliedSound({
+    haspisound = C_UnitAuras.AddAuraSound(Enum.UnitAuraSoundTrigger.Added, {
         unitToken = "player",
         spellID = 10060,  -- 能量灌注 (Power Infusion)
         soundFileName = fullPath,
