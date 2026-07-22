@@ -375,8 +375,8 @@ do
     layout:AddInitializer(init)
 end
 
--- 能量灌注音频（仅 12.1+ 支持 AddAuraAppliedSound 时显示）
-if C_UnitAuras.AddAuraAppliedSound then
+-- 能量灌注音频（仅 12.1+ 支持 AddAuraSound 时显示）
+if C_UnitAuras.AddAuraSound then
     -- 能量灌注音频单选项
     do
         local init = CreateSettingsButtonInitializer(
