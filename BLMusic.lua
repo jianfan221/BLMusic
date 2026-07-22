@@ -43,9 +43,10 @@ EventRegistry:RegisterFrameEventAndCallback("PLAYER_LEAVING_WORLD", function()
 end)
 
 --关闭设置界面时停止,防止存在试听
+-- 用 C_Timer.After(0) 推迟执行，防止污染 Blizzard 内部调用链（12.0.0+ 秘密值安全机制）
 if SettingsPanel then
     SettingsPanel:HookScript("OnHide", function()
-        ns.StopCurrentMusic()
+        C_Timer.After(0, ns.StopCurrentMusic)
     end)
 end
 
