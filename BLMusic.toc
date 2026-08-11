@@ -5,6 +5,8 @@
 ## Author: 简繁-无尽之海-CN
 ## IconTexture: 458224
 ## X-ModUs-UID: 22
+## X-Curse-Project-ID: 1584248
+## X-Wago-ID: BNBmrqGx
 ## SavedVariables: BLMusicDB
 ## Version: 20260728.1
 
