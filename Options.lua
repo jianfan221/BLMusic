@@ -94,19 +94,6 @@ end)
 local category, layout = Settings.RegisterVerticalLayoutCategory("BLMusic")
 Settings.RegisterAddOnCategory(category)
 
--- 隐藏"恢复默认"按钮（插件设置不需要重置 CVar）
-do
-    local catID = category:GetID()
-    hooksecurefunc(SettingsPanel, "DisplayCategory", function(self, cat)
-        local btn = self:GetSettingsList().Header.DefaultsButton
-        if btn then
-            btn:Show()
-            if cat and cat:GetID() == catID then
-                btn:Hide()
-            end
-        end
-    end)
-end
 
 layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(
     ns.L["简单便捷的嗜血播放音频插件"], ns.L["/bl 或 /blm 打开此界面"]))
