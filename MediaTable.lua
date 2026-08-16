@@ -30,6 +30,7 @@ ns.start = {
     { path = "manboNomore.mp3", name = "manboNomore" },--提供者Sins
     { path = "Sway to My Beat in Cosmos.mp3", name = T("在银河中孤独摇摆", "Sway to My Beat in Cosmos") },--提供者lzy
     { path = "Samurai Heart.mp3", name = T("魔神坛斗士", "Samurai Heart") },--提供者Nathan
+    { path = "Break up!.mp3", name = "Break up!" },--提供者潘常乐
 }
 --中文开始音频仅对中文用户显示
 if locale then
