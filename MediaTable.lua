@@ -32,6 +32,8 @@ ns.start = {
     { path = "Samurai Heart.mp3", name = T("魔神坛斗士", "Samurai Heart") },--提供者Nathan
     { path = "Break up!.mp3", name = "Break up!" },--提供者潘常乐
     { path = "A Call to Arms.mp3", name = "A Call to Arms" },   --提供者:金色平原-溯回之尾
+    { path = "GANGTIEHONGLIU .mp3", name = T("钢铁洪流进行曲", "Steel Torrent March") },
+    { path = "GUANLANGAOSHOU.mp3", name = T("灌篮高手", "Slam Dunk") },
 }
 --中文开始音频仅对中文用户显示
 if locale then
