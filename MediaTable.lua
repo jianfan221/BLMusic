@@ -34,6 +34,7 @@ ns.start = {
     { path = "A Call to Arms.mp3", name = "A Call to Arms" },   --提供者:金色平原-溯回之尾
     { path = "GANGTIEHONGLIU .mp3", name = T("钢铁洪流进行曲", "Steel Torrent March") },
     { path = "GUANLANGAOSHOU.mp3", name = T("灌篮高手", "Slam Dunk") },
+    { path = "usagiiiii.mp3", name = "Invincible usagi" },   --提供者:CCeci W
 }
 --中文开始音频仅对中文用户显示
 if locale then
