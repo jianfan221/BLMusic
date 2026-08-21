@@ -35,6 +35,8 @@ ns.start = {
     { path = "GANGTIEHONGLIU .mp3", name = T("钢铁洪流进行曲", "Steel Torrent March") },
     { path = "GUANLANGAOSHOU.mp3", name = T("灌篮高手", "Slam Dunk") },
     { path = "usagiiiii.mp3", name = "Invincible usagi" },   --提供者:CCeci W
+    { path = "GUAIWULIEREN.ogg", name = T("怪物猎人英雄之证", "Proof of a Hero") },  --提供者MINE TOSHIKURA
+    { path = "2026821.mp3", name = T("巨人的苏醒", "Awakening of the Giant") }, --提供者Guetse
 }
 --中文开始音频仅对中文用户显示
 if locale then
