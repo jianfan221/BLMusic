@@ -37,6 +37,7 @@ ns.start = {
     { path = "usagiiiii.mp3", name = "Invincible usagi" },   --提供者:CCeci W
     { path = "GUAIWULIEREN.ogg", name = T("怪物猎人英雄之证", "Proof of a Hero") },  --提供者MINE TOSHIKURA
     { path = "2026821.mp3", name = T("巨人的苏醒", "Awakening of the Giant") }, --提供者Guetse
+    { path = "ximan.mp3", name = T("宇宙巨人希曼", "He-Man") },   --提供者:大马虎
 }
 --中文开始音频仅对中文用户显示
 if locale then
