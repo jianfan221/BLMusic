@@ -40,6 +40,7 @@ ns.start = {
     { path = "ximan.mp3", name = T("宇宙巨人希曼", "He-Man") },   --提供者:大马虎
     { path = "dabaichui.mp3", name = T("大摆锤", "The Pendulum") },   --提供者:大马虎
     { path = "AIZO.mp3", name = "AIZO" },   --提供者:xQc
+    { path = "beidoushenquan.mp3", name = T("北斗神拳", "Fist of the North Star") },   --提供者:大马虎
 }
 --中文开始音频仅对中文用户显示
 if locale then
