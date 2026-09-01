@@ -13,7 +13,7 @@ Auto-play music during Bloodlust / Heroism / Time Warp
   - Time Warp (Mage)
   - Ancient Hysteria / Primal Rage (Hunter)
   - Fury of the Aspects (Evoker)
-- Custom audio file support — use your own MP3 files
+- Custom audio file support — use your own MP3 files (see [Custom Audio](#custom-audio))
 - Independent duration control for start and end music
 - Audio channel selection: Master, Music, SFX, Ambience, Dialog
 - Built-in volume slider per channel
@@ -39,6 +39,20 @@ Auto-play music during Bloodlust / Heroism / Time Warp
 4. Optionally select audio channel and adjust volume
 5. Next time Bloodlust/Heroism/Time Warp is cast in your group, the music plays automatically!
 
+## Custom Audio
+
+Simply dropping a file into the `Media/` folder is **not enough** — you must also register it in `MediaTable.lua` so it shows up in the in-game dropdown.
+
+1. Put your audio file into the `Media/` folder
+2. Open `MediaTable.lua` and register the file in the matching list:
+   - `ns.start` — start music (Bloodlust/Heroism/Time Warp begins)
+   - `ns["end"]` — end music (buff fades)
+   - `ns.pi` — Power Infusion music (file name must start with `pi-`)
+3. Add an entry in that list, e.g. `{ path = "yourfile.mp3", name = "Display Name" }`
+4. `/reload` the UI — the file now appears in the dropdown for selection
+
+Supported formats: MP3 / OGG.
+
 ---
 
 # 中文说明
@@ -48,7 +62,7 @@ Auto-play music during Bloodlust / Heroism / Time Warp
 - 施放**嗜血 / 英勇 / 时间扭曲**等团队加速技能时**自动播放开始音频**
 - 效果消失时**自动播放结束音频**
 - 支持所有嗜血系技能：嗜血、英勇、时间扭曲（法师）、远古狂乱/原始狂怒（猎人）、巨龙之怒（唤魔师）
-- 支持**自定义音频文件**，放入 Media 文件夹即可
+- 支持**自定义音频文件**：放入 Media 文件夹并在 MediaTable.lua 登记后，即可在下拉菜单中选择（详见下方"自定义音频"）
 - 开始音频和结束音频**可分别设置播放时长**
 - 音频通道可选：主音量 / 音乐 / 音效 / 环境 / 对话
 - **内置音量滑块**，快速调节当前通道音量
@@ -64,6 +78,20 @@ Auto-play music during Bloodlust / Heroism / Time Warp
 3. 设置各自的播放时长（多少秒后自动停止）
 4. 可选音频通道和音量
 5. 下次团队开嗜血/英勇时，音乐自动响起！
+
+## 自定义音频
+
+仅把音频文件放进 `Media/` 文件夹是**不够的**，还需要在 `MediaTable.lua` 中登记，才能在游戏内下拉菜单里显示出来。
+
+1. 将音频文件放入 `Media/` 文件夹
+2. 打开 `MediaTable.lua`，把文件登记到对应列表：
+   - `ns.start` — 开始音乐（嗜血/英勇/时间扭曲施放时）
+   - `ns["end"]` — 结束音乐（效果消失时）
+   - `ns.pi` — 能量灌注音乐（文件名必须以 `pi-` 开头）
+3. 在对应列表中新增一条，例如 `{ path = "你的文件.mp3", name = "显示名称" }`
+4. 重载界面 `/reload`，即可在下拉菜单中选择
+
+支持格式：MP3 / OGG。
 
 ## 作者
 
