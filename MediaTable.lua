@@ -75,5 +75,6 @@ ns.pi = {
 }
 if locale then
     tinsert(ns.pi, { path = "pi-jingjing.mp3", name = "【静静】能量灌注" })
+    tinsert(ns.pi, { path = "daerguang.mp3", name = "大耳光子抽你" })   --提供者:MINE TOSHIKURA
 end
 
