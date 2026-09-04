@@ -48,6 +48,7 @@ if locale then
     tinsert(ns.start, { path = "nana7mistar.ogg", name = "【Nana7mi】嗷呜~嗷呜~" })
     tinsert(ns.start, { path = "xin2sq.mp3", name = "新二神曲" })
     tinsert(ns.start, { path = "elong.ogg", name = "将军小曲" })
+    tinsert(ns.start, { path = "yuelengjing.ogg", name = "月棱镜威力，变身！" })  --提供者:烦烦烦饭饭饭
 end
 
 -- 结束音乐
