@@ -42,6 +42,7 @@ ns.start = {
     { path = "AIZO.mp3", name = "AIZO" },   --提供者:xQc
     { path = "beidoushenquan.mp3", name = T("北斗神拳", "Fist of the North Star") },   --提供者:大马虎
     { path = "jindalaihua.mp3", name = T("金达莱花", "Azalea") },   --提供者:时光二区陈璧莲
+    { path = "The Best Of Me.mp3", name = "The Best Of Me" },   --提供者:L
 }
 --中文开始音频仅对中文用户显示
 if locale then
