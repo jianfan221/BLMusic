@@ -43,6 +43,19 @@ ns.start = {
     { path = "beidoushenquan.mp3", name = T("北斗神拳", "Fist of the North Star") },   --提供者:大马虎
     { path = "jindalaihua.mp3", name = T("金达莱花", "Azalea") },   --提供者:时光二区陈璧莲
     { path = "The Best Of Me.mp3", name = "The Best Of Me" },   --提供者:L
+    { path = "Tokyo Drift.mp3", name = "Tokyo Drift" },   --提供者:陈世宇
+    { path = "Natural.ogg", name = "Natural" },   --提供者:家有“洛”宝
+    { path = "Future Funk.mp3", name = "Future Funk" },   --提供者:家有“洛”宝
+    { path = "Once Upon A Time.ogg", name = "Once Upon A Time" },   --提供者:家有“洛”宝
+    { path = "Run Away.ogg", name = "Run Away" },   --提供者:家有“洛”宝
+    { path = "tuong lai trong tay ban.mp3", name = "tuong lai trong tay ban" },   --提供者:家有“洛”宝
+    { path = "daweitianlong.mp3", name = T("大威天龙", "Mighty Heavenly Dragon") },   --提供者:家有“洛”宝
+    { path = "dongtian.mp3", name = T("动天", "Shaking the Heavens") },   --提供者:家有“洛”宝
+    { path = "hongyan.mp3", name = T("红炎", "Crimson Flame") },   --提供者:家有“洛”宝
+    { path = "jiaodu.mp3", name = T("角都", "Kakuzu") },   --提供者:家有“洛”宝
+    { path = "lufeimenggong.mp3", name = T("路飞猛攻", "Luffy's Fierce Attack") },   --提供者:家有“洛”宝
+    { path = "yitong.mp3", name = T("异童", "Otherworldly Child") },   --提供者:家有“洛”宝
+    { path = "yuanhangxingdegaobie.ogg", name = T("远航星的告别", "Farewell to the Voyager Star") },   --提供者:家有“洛”宝
 }
 --中文开始音频仅对中文用户显示
 if locale then
@@ -52,6 +65,10 @@ if locale then
     tinsert(ns.start, { path = "elong.ogg", name = "将军小曲" })
     tinsert(ns.start, { path = "yuelengjing.ogg", name = "月棱镜威力，变身！" })  --提供者:烦烦烦饭饭饭
     tinsert(ns.start, { path = "jianlai.mp3", name = "剑来" })  --提供者:家有“洛”宝
+    tinsert(ns.start, { path = "ziyoufeixiang.ogg", name = "自由飞翔" })  --提供者:家有“洛”宝
+    tinsert(ns.start, { path = "weiliaobuluo02.ogg", name = "为了部落02" })  --提供者:家有“洛”宝
+    tinsert(ns.start, { path = "genjishuleiting.ogg", name = "根基术雷霆" })  --提供者:家有“洛”宝
+    tinsert(ns.start, { path = "baofengcheng.ogg", name = "暴风城" })  --提供者:家有“洛”宝
 end
 
 -- 结束音乐
