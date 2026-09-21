@@ -56,6 +56,7 @@ ns.start = {
     { path = "lufeimenggong.mp3", name = T("路飞猛攻", "Luffy's Fierce Attack") },   --提供者:家有“洛”宝
     { path = "yitong.mp3", name = T("异童", "Otherworldly Child") },   --提供者:家有“洛”宝
     { path = "yuanhangxingdegaobie.ogg", name = T("远航星的告别", "Farewell to the Voyager Star") },   --提供者:家有“洛”宝
+    { path = "beishangdeyouxi.mp3", name = T("霸王十代", "Sad Duel") },
 }
 --中文开始音频仅对中文用户显示
 if locale then
