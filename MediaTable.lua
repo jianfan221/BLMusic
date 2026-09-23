@@ -57,6 +57,7 @@ ns.start = {
     { path = "yitong.mp3", name = T("异童", "Otherworldly Child") },   --提供者:家有“洛”宝
     { path = "yuanhangxingdegaobie.ogg", name = T("远航星的告别", "Farewell to the Voyager Star") },   --提供者:家有“洛”宝
     { path = "beishangdeyouxi.mp3", name = T("霸王十代", "Sad Duel") },
+    { path = "MEGALOBOX.mp3", name = "MEGALOBOX" },
 }
 --中文开始音频仅对中文用户显示
 if locale then
@@ -94,6 +95,7 @@ ns.pi = {
     { path = "pi-powerinfusion.mp3", name = "Power Infusion" },
     { path = "pi-lulu-Pirorirorin.ogg", name = T("【露露】Pirorirorin", "lulu - Pirorirorin") },
     { path = "pi-lulu-Wakuwaku.ogg", name = T("【露露】Wakuwaku", "lulu - Wakuwaku") },
+    { path = "pi-Ultimate Battle.mp3", name = T("终极的圣战", "Ultimate Battle") },
 }
 if locale then
     tinsert(ns.pi, { path = "pi-jingjing.mp3", name = "【静静】能量灌注" })
