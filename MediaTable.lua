@@ -3,102 +3,102 @@ local addonName, ns = ...
 local locale = GetLocale() == "zhCN" or GetLocale() == "zhTW"
 -- 本地化辅助：简体/繁体中文用中文，其他语言用英文
 local function T(zh, en)
-    en = en or zh
-    return locale and zh or en
+	en = en or zh
+	return locale and zh or en
 end
 
 -- {path = "音频文件名.后缀名", name = "下拉菜单显示的名字" }   --提供者:提供者名称
 -- 开始音乐
 ns.start = {
 	{ path = "", name = DISABLE },
-    { path = "123.mp3", name = CUSTOM.."  Interface\\123.mp3" },
-    { path = "123.ogg", name = CUSTOM.."  Interface\\123.ogg" },
-    { path = "msnzs.mp3", name = "Sailor Moon OST" },
-    { path = "Guangzhi.mp3", name = "Guangzhi" },
-    { path = "pedrolust.mp3", name = "pedrolust" },   --提供者:月璃韶华
-    { path = "retro game style.mp3", name = "Retro game style" },
-    { path = "For the blood god.mp3", name = "For the blood god" },   --提供者:二萌Alice
-    { path = "For the emperor.mp3", name = "For the emperor" },   --提供者:二萌Alice
-    { path = "let galaxy burn.mp3", name = "Let galaxy burn" },   --提供者:二萌Alice
-    { path = "space marine attack.mp3", name = "Space marine attack" },   --提供者:二萌Alice
-    { path = "yungongxunyin.mp3", name = T("云宫迅音", "Celestial Symphony") },
-    { path = "Shining soul.mp3", name = T("天空战记光之魂", "Shining soul") }, --提供者:山鬼
-    { path = "luffy attack.mp3", name = "Luffy attack" },   --提供者:蘑菇小射手-无尽之海
-    { path = "luffy's fierce attack.mp3", name = "Luffy's fierce attack" },   --提供者:蘑菇小射手-无尽之海
-    { path = "shumabaobei.mp3", name = T("数码宝贝 Brave Heart", "Digimon Brave Heart") },
-    { path = "ikun.mp3", name = "ikun" },
-    { path = "manboNomore.mp3", name = "manboNomore" },--提供者Sins
-    { path = "Sway to My Beat in Cosmos.mp3", name = T("在银河中孤独摇摆", "Sway to My Beat in Cosmos") },--提供者lzy
-    { path = "Samurai Heart.mp3", name = T("魔神坛斗士", "Samurai Heart") },--提供者Nathan
-    { path = "Break up!.mp3", name = "Break up!" },--提供者潘常乐
-    { path = "A Call to Arms.mp3", name = "A Call to Arms" },   --提供者:金色平原-溯回之尾
-    { path = "GANGTIEHONGLIU .mp3", name = T("钢铁洪流进行曲", "Steel Torrent March") },
-    { path = "GUANLANGAOSHOU.mp3", name = T("灌篮高手", "Slam Dunk") },
-    { path = "usagiiiii.mp3", name = "Invincible usagi" },   --提供者:CCeci W
-    { path = "GUAIWULIEREN.ogg", name = T("怪物猎人英雄之证", "Proof of a Hero") },  --提供者MINE TOSHIKURA
-    { path = "2026821.mp3", name = T("巨人的苏醒", "Awakening of the Giant") }, --提供者Guetse
-    { path = "ximan.mp3", name = T("宇宙巨人希曼", "He-Man") },   --提供者:大马虎
-    { path = "dabaichui.mp3", name = T("大摆锤", "The Pendulum") },   --提供者:大马虎
-    { path = "AIZO.mp3", name = "AIZO" },   --提供者:xQc
-    { path = "beidoushenquan.mp3", name = T("北斗神拳", "Fist of the North Star") },   --提供者:大马虎
-    { path = "jindalaihua.mp3", name = T("金达莱花", "Azalea") },   --提供者:时光二区陈璧莲
-    { path = "The Best Of Me.mp3", name = "The Best Of Me" },   --提供者:L
-    { path = "Tokyo Drift.mp3", name = "Tokyo Drift" },   --提供者:陈世宇
-    { path = "Natural.ogg", name = "Natural" },   --提供者:家有“洛”宝
-    { path = "Future Funk.mp3", name = "Future Funk" },   --提供者:家有“洛”宝
-    { path = "Once Upon A Time.ogg", name = "Once Upon A Time" },   --提供者:家有“洛”宝
-    { path = "Run Away.ogg", name = "Run Away" },   --提供者:家有“洛”宝
-    { path = "tuong lai trong tay ban.mp3", name = "tuong lai trong tay ban" },   --提供者:家有“洛”宝
-    { path = "daweitianlong.mp3", name = T("大威天龙", "Mighty Heavenly Dragon") },   --提供者:家有“洛”宝
-    { path = "dongtian.mp3", name = T("动天", "Shaking the Heavens") },   --提供者:家有“洛”宝
-    { path = "hongyan.mp3", name = T("红炎", "Crimson Flame") },   --提供者:家有“洛”宝
-    { path = "jiaodu.mp3", name = T("角都", "Kakuzu") },   --提供者:家有“洛”宝
-    { path = "lufeimenggong.mp3", name = T("路飞猛攻", "Luffy's Fierce Attack") },   --提供者:家有“洛”宝
-    { path = "yitong.mp3", name = T("异童", "Otherworldly Child") },   --提供者:家有“洛”宝
-    { path = "yuanhangxingdegaobie.ogg", name = T("远航星的告别", "Farewell to the Voyager Star") },   --提供者:家有“洛”宝
-    { path = "beishangdeyouxi.mp3", name = T("霸王十代", "Sad Duel") },
-    { path = "MEGALOBOX.mp3", name = "MEGALOBOX" },
+	{ path = "123.mp3", name = CUSTOM .. "  Interface\\123.mp3" },
+	{ path = "123.ogg", name = CUSTOM .. "  Interface\\123.ogg" },
+	{ path = "msnzs.mp3", name = "Sailor Moon OST" },
+	{ path = "Guangzhi.mp3", name = "Guangzhi" },
+	{ path = "pedrolust.mp3", name = "pedrolust" },   --提供者:月璃韶华
+	{ path = "retro game style.mp3", name = "Retro game style" },
+	{ path = "For the blood god.mp3", name = "For the blood god" },   --提供者:二萌Alice
+	{ path = "For the emperor.mp3", name = "For the emperor" },   --提供者:二萌Alice
+	{ path = "let galaxy burn.mp3", name = "Let galaxy burn" },   --提供者:二萌Alice
+	{ path = "space marine attack.mp3", name = "Space marine attack" },   --提供者:二萌Alice
+	{ path = "yungongxunyin.mp3", name = T("云宫迅音", "Celestial Symphony") },
+	{ path = "Shining soul.mp3", name = T("天空战记光之魂", "Shining soul") }, --提供者:山鬼
+	{ path = "luffy attack.mp3", name = "Luffy attack" },   --提供者:蘑菇小射手-无尽之海
+	{ path = "luffy's fierce attack.mp3", name = "Luffy's fierce attack" },   --提供者:蘑菇小射手-无尽之海
+	{ path = "shumabaobei.mp3", name = T("数码宝贝 Brave Heart", "Digimon Brave Heart") },
+	{ path = "ikun.mp3", name = "ikun" },
+	{ path = "manboNomore.mp3", name = "manboNomore" },--提供者Sins
+	{ path = "Sway to My Beat in Cosmos.mp3", name = T("在银河中孤独摇摆", "Sway to My Beat in Cosmos") },--提供者lzy
+	{ path = "Samurai Heart.mp3", name = T("魔神坛斗士", "Samurai Heart") },--提供者Nathan
+	{ path = "Break up!.mp3", name = "Break up!" },--提供者潘常乐
+	{ path = "A Call to Arms.mp3", name = "A Call to Arms" },   --提供者:金色平原-溯回之尾
+	{ path = "GANGTIEHONGLIU .mp3", name = T("钢铁洪流进行曲", "Steel Torrent March") },
+	{ path = "GUANLANGAOSHOU.mp3", name = T("灌篮高手", "Slam Dunk") },
+	{ path = "usagiiiii.mp3", name = "Invincible usagi" },   --提供者:CCeci W
+	{ path = "GUAIWULIEREN.ogg", name = T("怪物猎人英雄之证", "Proof of a Hero") },  --提供者MINE TOSHIKURA
+	{ path = "2026821.mp3", name = T("巨人的苏醒", "Awakening of the Giant") }, --提供者Guetse
+	{ path = "ximan.mp3", name = T("宇宙巨人希曼", "He-Man") },   --提供者:大马虎
+	{ path = "dabaichui.mp3", name = T("大摆锤", "The Pendulum") },   --提供者:大马虎
+	{ path = "AIZO.mp3", name = "AIZO" },   --提供者:xQc
+	{ path = "beidoushenquan.mp3", name = T("北斗神拳", "Fist of the North Star") },   --提供者:大马虎
+	{ path = "jindalaihua.mp3", name = T("金达莱花", "Azalea") },   --提供者:时光二区陈璧莲
+	{ path = "The Best Of Me.mp3", name = "The Best Of Me" },   --提供者:L
+	{ path = "Tokyo Drift.mp3", name = "Tokyo Drift" },   --提供者:陈世宇
+	{ path = "Natural.ogg", name = "Natural" },   --提供者:家有“洛”宝
+	{ path = "Future Funk.mp3", name = "Future Funk" },   --提供者:家有“洛”宝
+	{ path = "Once Upon A Time.ogg", name = "Once Upon A Time" },   --提供者:家有“洛”宝
+	{ path = "Run Away.ogg", name = "Run Away" },   --提供者:家有“洛”宝
+	{ path = "tuong lai trong tay ban.mp3", name = "tuong lai trong tay ban" },   --提供者:家有“洛”宝
+	{ path = "daweitianlong.mp3", name = T("大威天龙", "Mighty Heavenly Dragon") },   --提供者:家有“洛”宝
+	{ path = "dongtian.mp3", name = T("动天", "Shaking the Heavens") },   --提供者:家有“洛”宝
+	{ path = "hongyan.mp3", name = T("红炎", "Crimson Flame") },   --提供者:家有“洛”宝
+	{ path = "jiaodu.mp3", name = T("角都", "Kakuzu") },   --提供者:家有“洛”宝
+	{ path = "lufeimenggong.mp3", name = T("路飞猛攻", "Luffy's Fierce Attack") },   --提供者:家有“洛”宝
+	{ path = "yitong.mp3", name = T("异童", "Otherworldly Child") },   --提供者:家有“洛”宝
+	{ path = "yuanhangxingdegaobie.ogg", name = T("远航星的告别", "Farewell to the Voyager Star") },   --提供者:家有“洛”宝
+	{ path = "beishangdeyouxi.mp3", name = T("霸王十代", "Sad Duel") },
+	{ path = "MEGALOBOX.mp3", name = "MEGALOBOX" },
 }
 --中文开始音频仅对中文用户显示
 if locale then
-    tinsert(ns.start, { path = "lulustar.ogg", name = "【露露】恶龙咆哮，嗷呜~" })
-    tinsert(ns.start, { path = "nana7mistar.ogg", name = "【Nana7mi】嗷呜~嗷呜~" })
-    tinsert(ns.start, { path = "xin2sq.mp3", name = "新二神曲" })
-    tinsert(ns.start, { path = "elong.ogg", name = "将军小曲" })
-    tinsert(ns.start, { path = "yuelengjing.ogg", name = "月棱镜威力，变身！" })  --提供者:烦烦烦饭饭饭
-    tinsert(ns.start, { path = "jianlai.mp3", name = "剑来" })  --提供者:家有“洛”宝
-    tinsert(ns.start, { path = "ziyoufeixiang.ogg", name = "自由飞翔" })  --提供者:家有“洛”宝
-    tinsert(ns.start, { path = "weiliaobuluo02.ogg", name = "为了部落02" })  --提供者:家有“洛”宝
-    tinsert(ns.start, { path = "genjishuleiting.ogg", name = "根基术雷霆" })  --提供者:家有“洛”宝
-    tinsert(ns.start, { path = "baofengcheng.ogg", name = "暴风城" })  --提供者:家有“洛”宝
+	tinsert(ns.start, { path = "lulustar.ogg", name = "【露露】恶龙咆哮，嗷呜~" })
+	tinsert(ns.start, { path = "nana7mistar.ogg", name = "【Nana7mi】嗷呜~嗷呜~" })
+	tinsert(ns.start, { path = "xin2sq.mp3", name = "新二神曲" })
+	tinsert(ns.start, { path = "elong.ogg", name = "将军小曲" })
+	tinsert(ns.start, { path = "yuelengjing.ogg", name = "月棱镜威力，变身！" })  --提供者:烦烦烦饭饭饭
+	tinsert(ns.start, { path = "jianlai.mp3", name = "剑来" })  --提供者:家有“洛”宝
+	tinsert(ns.start, { path = "ziyoufeixiang.ogg", name = "自由飞翔" })  --提供者:家有“洛”宝
+	tinsert(ns.start, { path = "weiliaobuluo02.ogg", name = "为了部落02" })  --提供者:家有“洛”宝
+	tinsert(ns.start, { path = "genjishuleiting.ogg", name = "根基术雷霆" })  --提供者:家有“洛”宝
+	tinsert(ns.start, { path = "baofengcheng.ogg", name = "暴风城" })  --提供者:家有“洛”宝
 end
 
 -- 结束音乐
 ns["end"] = {
-    { path = "", name = DISABLE },
-    { path = "456.mp3", name = CUSTOM.."  Interface\\456.mp3" },
-    { path = "456.ogg", name = CUSTOM.."  Interface\\456.ogg" },
-    { path = "Magic.mp3", name = "Magic" },
-    { path = "Elf.mp3", name = "Elf" },
-    { path = "didi.mp3", name = "didi" },
-    { path = "bonus time.mp3", name = "Bonus time" },
+	{ path = "", name = DISABLE },
+	{ path = "456.mp3", name = CUSTOM .. "  Interface\\456.mp3" },
+	{ path = "456.ogg", name = CUSTOM .. "  Interface\\456.ogg" },
+	{ path = "Magic.mp3", name = "Magic" },
+	{ path = "Elf.mp3", name = "Elf" },
+	{ path = "didi.mp3", name = "didi" },
+	{ path = "bonus time.mp3", name = "Bonus time" },
 }
 --中文结束音频仅对中文用户显示
 if locale then
-    tinsert(ns["end"], { path = "luluend.ogg", name = "【露露】嗜血好啦" })
-    tinsert(ns["end"], { path = "nana7miend.ogg", name = "【Nana7mi】嗜血好啦" })
+	tinsert(ns["end"], { path = "luluend.ogg", name = "【露露】嗜血好啦" })
+	tinsert(ns["end"], { path = "nana7miend.ogg", name = "【Nana7mi】嗜血好啦" })
 end
 
 -- 能量灌注音频
 ns.pi = {
-    { path = "", name = DISABLE },
-    { path = "pi-powerinfusion.mp3", name = "Power Infusion" },
-    { path = "pi-lulu-Pirorirorin.ogg", name = T("【露露】Pirorirorin", "lulu - Pirorirorin") },
-    { path = "pi-lulu-Wakuwaku.ogg", name = T("【露露】Wakuwaku", "lulu - Wakuwaku") },
-    { path = "pi-Ultimate Battle.mp3", name = T("终极的圣战", "Ultimate Battle") },
+	{ path = "", name = DISABLE },
+	{ path = "pi-powerinfusion.mp3", name = "Power Infusion" },
+	{ path = "pi-lulu-Pirorirorin.ogg", name = T("【露露】Pirorirorin", "lulu - Pirorirorin") },
+	{ path = "pi-lulu-Wakuwaku.ogg", name = T("【露露】Wakuwaku", "lulu - Wakuwaku") },
+	{ path = "pi-Ultimate Battle.mp3", name = T("终极的圣战", "Ultimate Battle") },
 }
 if locale then
-    tinsert(ns.pi, { path = "pi-jingjing.mp3", name = "【静静】能量灌注" })
-    tinsert(ns.pi, { path = "daerguang.mp3", name = "大耳光子抽你" })   --提供者:MINE TOSHIKURA
+	tinsert(ns.pi, { path = "pi-jingjing.mp3", name = "【静静】能量灌注" })
+	tinsert(ns.pi, { path = "daerguang.mp3", name = "大耳光子抽你" })   --提供者:MINE TOSHIKURA
 end
 
