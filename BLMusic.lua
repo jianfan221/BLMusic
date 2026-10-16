@@ -127,42 +127,51 @@ end
 
 -- 注册能量灌注声音提醒
 local haspisound    -- 已注册的音频 ID，用于移除旧注册
-local pisoundDeferred  -- 战斗中已推迟注册的标志
+local pisoundRetryHandle
+
+local function ApplyPiSound(test)
+	if UnitAffectingCombat("player") then return false end
+
+	local pipath = BLMusicDB.piMusicFile
+	local fullPath = pipath and pipath ~= "" and MUSIC_PATH .. pipath
+	local ok = pcall(function()
+		if haspisound then
+			C_UnitAuras.RemoveAuraSound(haspisound)
+			haspisound = nil
+		end
+		if not fullPath then return end
+		haspisound = C_UnitAuras.AddAuraSound(Enum.UnitAuraSoundTrigger.Added, {
+			unitToken = "player",
+			spellID = 10060,  -- 能量灌注 (Power Infusion)
+			soundFileName = fullPath,
+			outputChannel = BLMusicDB.channel or "Master",
+		})
+	end)
+	if not ok then return false end
+
+	if test and fullPath then
+		PlaySoundFile(fullPath, BLMusicDB.channel or "Master")
+	end
+	return true
+end
+
 function ns.pisound(test)
 	if not C_UnitAuras.AddAuraSound then return end
 
-	--战斗中推迟到脱战后执行
-	if not pisoundDeferred and UnitAffectingCombat("player") then
-		pisoundDeferred = true
-		EventRegistry:RegisterFrameEventAndCallback("PLAYER_REGEN_ENABLED", function(self)
-			EventRegistry:UnregisterFrameEventAndCallback("PLAYER_REGEN_ENABLED", self)
-			pisoundDeferred = false
+	if ApplyPiSound(test) then
+		if pisoundRetryHandle then
+			pisoundRetryHandle:Unregister()
+			pisoundRetryHandle = nil
+		end
+		return true
+	end
+	if not pisoundRetryHandle then
+		pisoundRetryHandle = EventRegistry:RegisterFrameEventAndCallbackWithHandle("ADDON_RESTRICTION_STATE_CHANGED", function(_, _, state)
+			if state ~= Enum.AddOnRestrictionState.Inactive then return end
 			ns.pisound(test)
 		end)
-		return
 	end
-
-	-- 先移除旧注册
-	if haspisound then
-		C_UnitAuras.RemoveAuraSound(haspisound)
-		haspisound = nil
-	end
-
-	local pipath = BLMusicDB.piMusicFile
-	if not pipath or pipath == "" then
-		return
-	end
-
-	local fullPath = MUSIC_PATH .. pipath
-	if test then
-		PlaySoundFile(fullPath, BLMusicDB.channel or "Master")
-	end
-	haspisound = C_UnitAuras.AddAuraSound(Enum.UnitAuraSoundTrigger.Added, {
-		unitToken = "player",
-		spellID = 10060,  -- 能量灌注 (Power Infusion)
-		soundFileName = fullPath,
-		outputChannel = BLMusicDB.channel or "Master",
-	})
+	return false
 end
 
 -- 初始扫描：检查是否已有嗜血 debuff
