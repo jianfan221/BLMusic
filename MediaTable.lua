@@ -96,6 +96,7 @@ ns.pi = {
 	{ path = "pi-lulu-Pirorirorin.ogg", name = T("【露露】Pirorirorin", "lulu - Pirorirorin") },
 	{ path = "pi-lulu-Wakuwaku.ogg", name = T("【露露】Wakuwaku", "lulu - Wakuwaku") },
 	{ path = "pi-Ultimate Battle.mp3", name = T("终极的圣战", "Ultimate Battle") },
+	{ path = "pi-tongdiaozhaohuan.mp3", name = T("同调召唤", "Synchro Summon") },
 }
 if locale then
 	tinsert(ns.pi, { path = "pi-jingjing.mp3", name = "【静静】能量灌注" })
