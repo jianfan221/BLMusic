@@ -22,6 +22,7 @@ ns.start = {
 	{ path = "let galaxy burn.mp3", name = "Let galaxy burn" },   --提供者:二萌Alice
 	{ path = "space marine attack.mp3", name = "Space marine attack" },   --提供者:二萌Alice
 	{ path = "yungongxunyin.mp3", name = T("云宫迅音", "Celestial Symphony") },
+	{ path = "yungongxunyinyuanban.mp3", name = T("云宫迅音原版", "Celestial Symphony (Original)") },
 	{ path = "Shining soul.mp3", name = T("天空战记光之魂", "Shining soul") }, --提供者:山鬼
 	{ path = "luffy attack.mp3", name = "Luffy attack" },   --提供者:蘑菇小射手-无尽之海
 	{ path = "luffy's fierce attack.mp3", name = "Luffy's fierce attack" },   --提供者:蘑菇小射手-无尽之海
@@ -71,6 +72,7 @@ if locale then
 	tinsert(ns.start, { path = "weiliaobuluo02.ogg", name = "为了部落02" })  --提供者:家有“洛”宝
 	tinsert(ns.start, { path = "genjishuleiting.ogg", name = "根基术雷霆" })  --提供者:家有“洛”宝
 	tinsert(ns.start, { path = "baofengcheng.ogg", name = "暴风城" })  --提供者:家有“洛”宝
+	tinsert(ns.start, { path = "laizitiantangdemogui.MP3", name = "来自天堂的魔鬼" })  --提供者:一箭破风
 end
 
 -- 结束音乐
