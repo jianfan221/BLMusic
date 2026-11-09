@@ -8,7 +8,7 @@
 ## X-Curse-Project-ID: 1584248
 ## X-Wago-ID: BNBmrqGx
 ## SavedVariables: BLMusicDB
-## Version: 20261028
+## Version: 20261110
 
 BLMusic.lua
 MediaTable.lua
