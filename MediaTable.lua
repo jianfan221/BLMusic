@@ -59,6 +59,7 @@ ns.start = {
 	{ path = "yuanhangxingdegaobie.ogg", name = T("远航星的告别", "Farewell to the Voyager Star") },   --提供者:家有“洛”宝
 	{ path = "beishangdeyouxi.mp3", name = T("霸王十代", "Sad Duel") },
 	{ path = "MEGALOBOX.mp3", name = "MEGALOBOX" },
+	{ path = "Mass Destruction -Reload.mp3", name = "Mass Destruction - Reload" },   --提供者:602656091
 }
 --中文开始音频仅对中文用户显示
 if locale then
