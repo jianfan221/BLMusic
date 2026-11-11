@@ -60,6 +60,7 @@ ns.start = {
 	{ path = "beishangdeyouxi.mp3", name = T("霸王十代", "Sad Duel") },
 	{ path = "MEGALOBOX.mp3", name = "MEGALOBOX" },
 	{ path = "Mass Destruction -Reload.mp3", name = "Mass Destruction - Reload" },   --提供者:602656091
+	{ path = "SXwind.mp3", name = T("快哉风", "Joyous Wind") },   --提供者:宋晓杨
 }
 --中文开始音频仅对中文用户显示
 if locale then
