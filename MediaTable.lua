@@ -61,6 +61,14 @@ ns.start = {
 	{ path = "MEGALOBOX.mp3", name = "MEGALOBOX" },
 	{ path = "Mass Destruction -Reload.mp3", name = "Mass Destruction - Reload" },   --提供者:602656091
 	{ path = "SXwind.mp3", name = T("快哉风", "Joyous Wind") },   --提供者:宋晓杨
+	{ path = "V.A. - XY&Z.mp3", name = "XY&Z" },   --提供者:米花霸霸
+	{ path = "V.A.-Chain Attack.mp3", name = "Chain Attack" },   --提供者:米花霸霸
+	{ path = "eternal-loneliness.mp3", name = T("永远的孤独", "Eternal Loneliness") },   --提供者:米花霸霸
+	{ path = "ultraman-z-original-form.mp3", name = T("泽塔奥特曼 原生形态", "Ultraman Z - Original Form") },   --提供者:米花霸霸
+	{ path = "ultraman-z-delta-rise-claw.mp3", name = T("泽塔奥特曼 德尔塔天爪", "Ultraman Z - Delta Rise Claw") },   --提供者:米花霸霸
+	{ path = "ultraman-z-alpha-edge.mp3", name = T("泽塔奥特曼 阿尔法装甲", "Ultraman Z - Alpha Edge") },   --提供者:米花霸霸
+	{ path = "snake-tail-mission-start.mp3", name = T("蛇尾 - 任务开始", "Snake Tail - Mission Start") },   --提供者:米花霸霸
+	{ path = "crimson-strike.mp3", name = T("赤色一击", "Crimson Strike") },   --提供者:米花霸霸
 }
 --中文开始音频仅对中文用户显示
 if locale then
